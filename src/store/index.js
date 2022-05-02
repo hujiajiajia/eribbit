@@ -1,6 +1,27 @@
 import { createStore } from 'vuex'
 
-// A模块
+import cart from './modules/cart'
+import category from './modules/category'
+import user from './modules/user'
+
+import createPersistedState from 'vuex-persistedstate'
+
+export default createStore({
+  modules: {
+    cart,
+    category,
+    user
+  },
+  // 配置插件
+  plugins: [
+    // 默认存储在localstorage上
+    createPersistedState({
+      key: 'erabbit-client-pc-store',
+      paths: ['user', 'cart']
+    })
+  ]
+})
+/* // A模块
 const moduleA = {
   // 子模块state建议写成函数
   state: () => {
@@ -48,7 +69,7 @@ export default createStore({
     moduleB
   }
 
-})
+}) */
 
 // vue2.0 new Vuex.store({})sssssssssss
 // vue3.0 创建仓库createStore({})
